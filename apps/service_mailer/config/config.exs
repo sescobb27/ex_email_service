@@ -34,5 +34,4 @@ config :service_mailer, ServiceMailer.Mailer,
   api_key: System.get_env("MAILGUN_API_KEY"),
   from_email: "noreply@test.com"
 
-
 import_config "#{Mix.env()}.exs"

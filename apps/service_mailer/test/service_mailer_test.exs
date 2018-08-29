@@ -31,21 +31,21 @@ defmodule ServiceMailerTest do
   end
 
   test "sends dynamic email based on template" do
-      ServiceMailer.send_email(%{
-        "to" => "user@example.com",
-        "subject" => "Welcome Email",
-        "template" => "welcome",
-        "assigns" => %{
-          "name" => "Simon",
-          "username" => "fakeuser"
-        }
-      })
+    ServiceMailer.send_email(%{
+      "to" => "user@example.com",
+      "subject" => "Welcome Email",
+      "template" => "welcome",
+      "assigns" => %{
+        "name" => "Simon",
+        "username" => "fakeuser"
+      }
+    })
 
-      assert_email_delivered_with(
-        from: {nil, "noreply@test.com"},
-        to: [{nil, "user@example.com"}],
-        subject: "Welcome Email",
-        html_body: "<h1>Welcome</h1>\n\nHello Simon, Welcome Aboard!\n"
-      )
+    assert_email_delivered_with(
+      from: {nil, "noreply@test.com"},
+      to: [{nil, "user@example.com"}],
+      subject: "Welcome Email",
+      html_body: "<h1>Welcome</h1>\n\nHello Simon, Welcome Aboard!\n"
+    )
   end
 end

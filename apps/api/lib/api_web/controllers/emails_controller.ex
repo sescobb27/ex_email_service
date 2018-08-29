@@ -10,16 +10,19 @@ defmodule ApiWeb.EmailsController do
   # Architecture is really simple, there are 2 Apps the core one which is in charge
   # of sending emails, and this one that is just the WEB layer on top of it
   def create(conn, params) do
-    case ServiceMailer.send_email() do
+    # FIX: don't inject params directly, we would need to validate them, cast them and then
+    # send the emails, but for now, this is ok
+    case ServiceMailer.send_email(params) do
       {:error, error} ->
         Logger.error("error sending email, reason #{inspect(error)}")
+
+        conn
         |> put_status(:unprocessable_entity)
         |> render(ApiWeb.ErrorView, "422.json")
         |> halt()
 
       _ ->
-        conn
-        |> send_resp(:ok, "")
+        send_resp(conn, :ok, "")
     end
   end
 end
