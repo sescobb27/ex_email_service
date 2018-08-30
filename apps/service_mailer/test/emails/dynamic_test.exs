@@ -5,9 +5,9 @@ defmodule ServiceMailer.Emails.DynamicEmailTest do
 
   test "creates a dynamic email" do
     body = %{
-      "to" => "user@example.com",
-      "subject" => "Example Email",
-      "body" => "<html><body><h1>Hello World!</h1></body></html>"
+      to: "user@example.com",
+      subject: "Example Email",
+      body: "<html><body><h1>Hello World!</h1></body></html>"
     }
 
     assert %Bamboo.Email{
@@ -20,10 +20,10 @@ defmodule ServiceMailer.Emails.DynamicEmailTest do
 
   test "creates a dynamic email based on a template" do
     body = %{
-      "to" => "user@example.com",
-      "subject" => "Welcome Email",
-      "template" => "welcome",
-      "assigns" => %{
+      to: "user@example.com",
+      subject: "Welcome Email",
+      template: "welcome",
+      assigns: %{
         "name" => "Simon",
         "username" => "fakeuser"
       }

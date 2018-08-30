@@ -8,10 +8,14 @@ defmodule Consumer.PoolSupervisor do
   @impl true
   def init({rabbit_config, pool_config}) do
     pool_name = Keyword.fetch!(pool_config, :pool_name)
+    pool_size = Keyword.fetch!(pool_config, :size)
 
-    children = [
-      :poolboy.child_spec(pool_name, pool_config, rabbit_config)
-    ]
+    children =
+      if pool_size != 0 do
+        [:poolboy.child_spec(pool_name, pool_config, rabbit_config)]
+      else
+        []
+      end
 
     opts = [strategy: :one_for_one]
     Supervisor.init(children, opts)
