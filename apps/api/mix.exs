@@ -41,7 +41,8 @@ defmodule Api.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:service_mailer, in_umbrella: true},
-      {:mock, "~> 0.3", only: :test}
+      {:mock, "~> 0.3", only: :test},
+      {:ranch, "~> 1.5", override: true}
     ]
   end
 end
