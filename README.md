@@ -102,11 +102,31 @@ is going to mark itself as a consumer. when there is an error we are going to re
 and requeue the email for latter processing. if everything is ok we are going to
 ACK rabbitmq telling the email was successfully processed.
 
+With this architecture you can scale to thousands of open channels to rabbitmq
+scaling pretty well, its also resilient and fault tolerant.
+
 ## Sending Emails from the command line
 
 ```sh
 # you have to go to the service mailer app in order to build the script, if not
 # you are going to get ** (Mix) Building escripts for umbrella projects is unsupported
-$> cd apps/service_mailer/
+$> cd apps/service_mailer
 $> mix escript.build
 $> ./service_mailer --to "user@example.com" --subject "Welcome Email" --template "welcome" --assigns "name::Simon,username::fakeuser"
+# or
+$> ./service_mailer --to "user@example.com" --subject "Welcome Email" --body "<html><body><h1>Hello World!</h1></body></html>"
+```
+
+## You can also publish emails to the queue, what it does is start a connection pool,
+parse the JSON email metadata, and publish it to the specified queue and exchange
+via application config.
+
+```sh
+$> cd apps/consumer
+$> mix escript.build
+$> ./produce --email '{ "to": "user@example.com", "subject": "Welcome Email", "body": "<html><body><h1>Hello World!</h1></body></html>" }'
+```
+
+## TODO
+
+try to build the binaries into the root directory for ease of use
