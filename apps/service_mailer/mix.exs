@@ -11,14 +11,19 @@ defmodule ServiceMailer.MixProject do
       lockfile: "../../mix.lock",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      escript: escript()
     ]
+  end
+
+  defp escript do
+    [main_module: ServiceMailer.Cli]
   end
 
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
+      extra_applications: [:logger, :eex],
       mod: {ServiceMailer.Application, []}
     ]
   end
