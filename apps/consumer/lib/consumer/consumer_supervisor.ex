@@ -11,8 +11,12 @@ defmodule Consumer.ConsumerSupervisor do
     consumers = Keyword.fetch!(rabbit_config, :consumers)
 
     children =
-      for n <- 1..consumers do
-        Supervisor.child_spec({Consumer, pool_name}, id: "consumer_#{n}")
+      if consumers != 0 do
+        for n <- 1..consumers do
+          Supervisor.child_spec({Consumer, pool_name}, id: "consumer_#{n}")
+        end
+      else
+        []
       end
 
     opts = [strategy: :one_for_one]

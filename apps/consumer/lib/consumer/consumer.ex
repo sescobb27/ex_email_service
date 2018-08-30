@@ -79,7 +79,7 @@ defmodule Consumer.Consumer do
         Basic.reject(channel, tag, requeue: true)
 
       _ ->
-        Basick.ack(channel, tag)
+        Basic.ack(channel, tag)
         Logger.info("[success] email processed")
     end
 

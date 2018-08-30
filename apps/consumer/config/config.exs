@@ -28,10 +28,4 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 
-config :consumer, :rabbitmq_config,
-  queue: "emails.queue",
-  exchange: "",
-  pool_name: :connection_pool,
-  consumers: 100
-
 import_config "#{Mix.env()}.exs"
