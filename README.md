@@ -117,8 +117,9 @@ $> ./service_mailer --to "user@example.com" --subject "Welcome Email" --template
 $> ./service_mailer --to "user@example.com" --subject "Welcome Email" --body "<html><body><h1>Hello World!</h1></body></html>"
 ```
 
-## You can also publish emails to the queue, what it does is start a connection pool,
-parse the JSON email metadata, and publish it to the specified queue and exchange
+## You can also publish emails to the queue
+
+what it does is start a connection pool parse the JSON email metadata, and publish it to the specified queue and exchange
 via application config.
 
 ```sh
