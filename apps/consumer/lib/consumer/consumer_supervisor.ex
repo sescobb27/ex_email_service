@@ -3,12 +3,11 @@ defmodule Consumer.ConsumerSupervisor do
 
   alias Consumer.Consumer
 
-  def start_link(rabbit_config) do
-    Supervisor.start_link(__MODULE__, rabbit_config, name: __MODULE__)
+  def start_link(args) do
+    Supervisor.start_link(__MODULE__, args, name: __MODULE__)
   end
 
-  def init(rabbit_config) do
-    pool_name = Keyword.fetch!(rabbit_config, :pool_name)
+  def init({rabbit_config, pool_name}) do
     consumers = Keyword.fetch!(rabbit_config, :consumers)
 
     children =
